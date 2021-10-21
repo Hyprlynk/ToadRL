@@ -1,7 +1,7 @@
 from typing import Optional
 import tcod.event
 
-from actions import Action, EscapeAction, MovementAction
+from actions import Action, EscapeAction, BumpAction
 
 
 class EventHandler(tcod.event.EventDispatch[Action]):
@@ -13,24 +13,35 @@ class EventHandler(tcod.event.EventDispatch[Action]):
 
         key = event.sym
 
+        # Numpad movement
         if key == tcod.event.K_KP_1:
-            action = MovementAction(dx=-1, dy=1)
+            action = BumpAction(dx=-1, dy=1)
         elif key == tcod.event.K_KP_2:
-            action = MovementAction(dx=0, dy=1)
+            action = BumpAction(dx=0, dy=1)
         elif key == tcod.event.K_KP_3:
-            action = MovementAction(dx=1, dy=1)
+            action = BumpAction(dx=1, dy=1)
         elif key == tcod.event.K_KP_4:
-            action = MovementAction(dx=-1, dy=0)
+            action = BumpAction(dx=-1, dy=0)
         elif key == tcod.event.K_KP_5:
-            action = MovementAction(dx=0, dy=0)
+            action = BumpAction(dx=0, dy=0)
         elif key == tcod.event.K_KP_6:
-            action = MovementAction(dx=1, dy=0)
+            action = BumpAction(dx=1, dy=0)
         elif key == tcod.event.K_KP_7:
-            action = MovementAction(dx=-1, dy=-1)
+            action = BumpAction(dx=-1, dy=-1)
         elif key == tcod.event.K_KP_8:
-            action = MovementAction(dx=0, dy=-1)
+            action = BumpAction(dx=0, dy=-1)
         elif key == tcod.event.K_KP_9:
-            action = MovementAction(dx=1, dy=-1)
+            action = BumpAction(dx=1, dy=-1)
+
+        # Arrow keys
+        elif key == tcod.event.K_UP:
+            action = BumpAction(dx=0, dy=-1)
+        elif key == tcod.event.K_DOWN:
+            action = BumpAction(dx=0, dy=1)
+        elif key == tcod.event.K_LEFT:
+            action = BumpAction(dx=-1, dy=0)
+        elif key == tcod.event.K_RIGHT:
+            action = BumpAction(dx=1, dy=0)
 
         elif key == tcod.event.K_ESCAPE:
             action = EscapeAction()
