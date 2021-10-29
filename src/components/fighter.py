@@ -44,7 +44,7 @@ class Fighter(BaseComponent):
         self.parent.color = (191, 0, 0)
         self.parent.blocks_movement = False
         self.parent.ai = None
-        self.parent.name = f"remains of {self.parent.name}"
+        self.parent.name = f"{self.parent.name} corpse"
         self.parent.render_order = RenderOrder.CORPSE
 
         print(death_message)
