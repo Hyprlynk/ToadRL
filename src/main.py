@@ -23,7 +23,7 @@ def main() -> None:
     max_rooms = 36
 
     max_monsters_per_room = 2
-    max_items_per_room = 2
+    max_items_per_room = 8
 
     tileset = tcod.tileset.load_tilesheet(
         "tiles.png", 32, 8, tcod.tileset.CHARMAP_TCOD
