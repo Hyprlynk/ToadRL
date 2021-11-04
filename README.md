@@ -2,4 +2,4 @@
 
 toad-based roguelike
 
-made with the Yet Another Roguelike Tutorial for Python 3 and TCOD
+made with the TCOD Tutorial (2020) from rogueliketutorials.com
