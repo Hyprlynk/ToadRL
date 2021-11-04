@@ -1,1 +1,1 @@
-store map chunks with 3d coordinates
+store map chunks in a 3d numpy array
