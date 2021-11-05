@@ -1,1 +1,21 @@
-store map chunks in a 3d numpy array
+WORLD
+
+- store map chunks in a 3d numpy array in the GameWorld class?
+
+- action for descending a staircase
+- action for moving from one chunk to another
+
+- map chunks have a biome
+- biomes extend down z-levels
+- biome locations are hard-coded
+- biomes determine parameters for procgen, tile colors
+
+- some map chunks contain a hardcoded map
+- create maps using Tiled editor?
+- load tmx files using pytmx
+- maybe store the entire world in a tmx file?
+
+
+MISC
+
+- make corpses into edible items
