@@ -1,0 +1,16 @@
+{
+    "maps": [
+        {
+            "fileName": "testmap.tmx",
+            "x": 0,
+            "y": 0
+        },
+        {
+            "fileName": "testmap2.tmx",
+            "x": -800,
+            "y": 0
+        }
+    ],
+    "onlyShowAdjacentMaps": false,
+    "type": "world"
+}
