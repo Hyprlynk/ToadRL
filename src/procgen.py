@@ -6,12 +6,12 @@ from typing import Iterator, List, Tuple, TYPE_CHECKING
 import tcod
 
 import entity_factories
-from game_map import GameMap
 import tile_types
 
 
 if TYPE_CHECKING:
     from engine import Engine
+    from game_map import GameMap
 
 
 class RectangularRoom:
@@ -96,7 +96,7 @@ def tunnel_between(start: Tuple[int, int], end: Tuple[int, int]) -> Iterator[Tup
         yield x, y
 
 
-def generate_dungeon(
+def generate_simple_dungeon(
     max_rooms: int,
     room_min_size: int,
     room_max_size: int,

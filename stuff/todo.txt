@@ -16,6 +16,7 @@ SUPER COOL ADVANCED WORLD
 SCALING IT BACK A BIT
 - more traditional dungeon-crawler style
 - almost all procgen
+- no up-stairs to prevent running around to shops and stuff
 - biomes will still exist for z-levels and branches
 - maybe use prefabs for some biomes
 - maybe crawl-style dungeon branches?

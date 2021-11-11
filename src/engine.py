@@ -60,6 +60,7 @@ class Engine:
             console=console,
             dungeon_level=self.game_world.current_floor,
             location=(0, 47),
+            biome_name=self.game_world.biome.display_name
         )
 
         render_functions.render_names_at_mouse_location(
