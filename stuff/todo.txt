@@ -1,4 +1,4 @@
-WORLD
+SUPER COOL ADVANCED WORLD
 - action for descending a staircase
 - action for moving from one chunk to another
 
@@ -11,6 +11,26 @@ WORLD
 - create maps using Tiled editor?
 - load tmx files using pytmx
 - maybe store the entire world in a 3d .world file??
+
+
+SCALING IT BACK A BIT
+- more traditional dungeon-crawler style
+- almost all procgen
+- biomes will still exist for z-levels and branches
+- maybe use prefabs for some biomes
+- maybe crawl-style dungeon branches?
+    - branches are basically just another set of biomes that correspond to z-levels
+    - special "branch staircase"
+    - sets a current_branch variable
+
+- start at the main level of toad hill
+- descend deeper into the depths of the hill
+- monsters live down there
+- shopkeepers are there but they're total weirdos because they live in dangerous places
+- there are some cave-like levels
+- some ruin-like levels from ancient toad civilizations
+- eventually you encounter towns like in nethack
+
 
 MISC
 
