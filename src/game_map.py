@@ -4,12 +4,9 @@ from typing import Iterable, Iterator, Optional, TYPE_CHECKING
 
 import numpy as np  # type: ignore
 from tcod.console import Console
-from tcod.constants import CHAR_CURRENCY
 
 from entity import Actor, Item
-import procgen
 import tile_types
-from level_order import LEVEL_ORDER
 
 if TYPE_CHECKING:
     from engine import Engine
@@ -106,7 +103,11 @@ class GameWorld:
         engine: Engine,
         map_width: int,
         map_height: int,
-        biome: Biome,
+        max_rooms: int,
+        room_min_size: int,
+        room_max_size: int,
+        max_monsters_per_room: int,
+        max_items_per_room: int,
         current_floor: int = 0
     ):
         self.engine = engine
@@ -114,52 +115,28 @@ class GameWorld:
         self.map_width = map_width
         self.map_height = map_height
 
-        self.biome = LEVEL_ORDER[current_floor]
+        self.max_rooms = max_rooms
+
+        self.room_min_size = room_min_size
+        self.room_max_size = room_max_size
+
+        self.max_monsters_per_room = max_monsters_per_room
+        self.max_items_per_room = max_items_per_room
 
         self.current_floor = current_floor
 
     def generate_floor(self) -> None:
-        self.current_floor += 1
-        self.biome = LEVEL_ORDER[self.current_floor]
+        from procgen import generate_dungeon
 
-        self.engine.game_map = self.biome.procgen_algorithm(
+        self.current_floor += 1
+
+        self.engine.game_map = generate_dungeon(
+            max_rooms=self.max_rooms,
+            room_min_size=self.room_min_size,
+            room_max_size=self.room_max_size,
             map_width=self.map_width,
             map_height=self.map_height,
-
-            max_rooms=self.biome.max_rooms,
-            room_min_size=self.biome.room_min_size,
-            room_max_size=self.biome.room_max_size,
-            max_monsters_per_room=self.biome.max_monsters_per_room,
-            max_items_per_room=self.biome.max_items_per_room,
-
+            max_monsters_per_room=self.max_monsters_per_room,
+            max_items_per_room=self.max_items_per_room,
             engine=self.engine,
         )
-
-
-class Biome:
-    def __init__(
-        self,
-        display_name: str,
-        max_rooms: int,
-        room_min_size: int,
-        room_max_size: int,
-        max_monsters_per_room: int,
-        max_items_per_room: int,
-        procgen_algorithm: function,
-    ):
-        self.max_rooms = max_rooms
-        self.room_min_size = room_min_size
-        self.room_max_size = room_max_size
-        self.max_monsters_per_room = max_monsters_per_room
-        self.max_items_per_room = max_items_per_room
-        self.procgen_algorithm = procgen_algorithm
-
-basic_dungeon = Biome(
-    display_name = 'Basic Dungeon',
-    max_rooms = 30,
-    room_min_size = 6,
-    room_max_size = 10,
-    max_monsters_per_room = 6,
-    max_items_per_room = 12,
-    procgen_algorithm=procgen.generate_simple_dungeon
-)
