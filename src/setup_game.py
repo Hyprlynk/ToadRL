@@ -31,6 +31,7 @@ def new_game() -> Engine:
 
     engine.game_world = GameWorld(
         engine=engine,
+        biome=None,
         map_width=map_width,
         map_height=map_height,
     )

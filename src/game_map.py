@@ -9,7 +9,6 @@ from tcod.constants import CHAR_CURRENCY
 from entity import Actor, Item
 import procgen
 import tile_types
-from level_order import LEVEL_ORDER
 
 if TYPE_CHECKING:
     from engine import Engine
@@ -69,7 +68,7 @@ class GameMap:
     def render(self, console: Console) -> None:
         """
         Renders the map.
- 
+
         If a tile is in the "visible" array, then draw it with the "light" colors.
         If it isn't, but it's in the "explored" array, then draw it with the "dark" colors.
         Otherwise, the default is "SHROUD".
@@ -88,11 +87,49 @@ class GameMap:
             # Only print entities that are in the FOV
             if self.visible[entity.x, entity.y]:
                 console.print(
-                    x=entity.x, 
-                    y=entity.y, 
-                    string=entity.char, 
+                    x=entity.x,
+                    y=entity.y,
+                    string=entity.char,
                     fg=entity.color
                 )
+
+
+class Biome:
+    def __init__(
+        self,
+        display_name: str,
+        max_rooms: int,
+        room_min_size: int,
+        room_max_size: int,
+        max_monsters_per_room: int,
+        max_items_per_room: int,
+        procgen_algorithm: function,
+    ):
+        self.display_name = display_name
+        self.max_rooms = max_rooms
+        self.room_min_size = room_min_size
+        self.room_max_size = room_max_size
+        self.max_monsters_per_room = max_monsters_per_room
+        self.max_items_per_room = max_items_per_room
+        self.procgen_algorithm = procgen_algorithm
+
+
+basic_dungeon = Biome(
+    display_name='Basic Dungeon',
+    max_rooms=30,
+    room_min_size=6,
+    room_max_size=10,
+    max_monsters_per_room=6,
+    max_items_per_room=12,
+    procgen_algorithm=procgen.generate_simple_dungeon
+)
+
+
+LEVEL_ORDER = [
+    basic_dungeon,
+    basic_dungeon,
+    basic_dungeon,
+]
 
 
 class GameWorld:
@@ -114,7 +151,7 @@ class GameWorld:
         self.map_width = map_width
         self.map_height = map_height
 
-        self.biome = LEVEL_ORDER[current_floor]
+        self.biome = None
 
         self.current_floor = current_floor
 
@@ -134,32 +171,3 @@ class GameWorld:
 
             engine=self.engine,
         )
-
-
-class Biome:
-    def __init__(
-        self,
-        display_name: str,
-        max_rooms: int,
-        room_min_size: int,
-        room_max_size: int,
-        max_monsters_per_room: int,
-        max_items_per_room: int,
-        procgen_algorithm: function,
-    ):
-        self.max_rooms = max_rooms
-        self.room_min_size = room_min_size
-        self.room_max_size = room_max_size
-        self.max_monsters_per_room = max_monsters_per_room
-        self.max_items_per_room = max_items_per_room
-        self.procgen_algorithm = procgen_algorithm
-
-basic_dungeon = Biome(
-    display_name = 'Basic Dungeon',
-    max_rooms = 30,
-    room_min_size = 6,
-    room_max_size = 10,
-    max_monsters_per_room = 6,
-    max_items_per_room = 12,
-    procgen_algorithm=procgen.generate_simple_dungeon
-)
