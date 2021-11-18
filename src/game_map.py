@@ -66,7 +66,7 @@ class GameMap:
     def render(self, console: Console) -> None:
         """
         Renders the map.
- 
+
         If a tile is in the "visible" array, then draw it with the "light" colors.
         If it isn't, but it's in the "explored" array, then draw it with the "dark" colors.
         Otherwise, the default is "SHROUD".
@@ -85,11 +85,41 @@ class GameMap:
             # Only print entities that are in the FOV
             if self.visible[entity.x, entity.y]:
                 console.print(
-                    x=entity.x, 
-                    y=entity.y, 
-                    string=entity.char, 
+                    x=entity.x,
+                    y=entity.y,
+                    string=entity.char,
                     fg=entity.color
                 )
+
+
+class Biome:
+    def __init__(
+        self,
+        display_name: str,
+        max_rooms: int,
+        room_min_size: int,
+        room_max_size: int,
+        max_monsters_per_room: int,
+        max_items_per_room: int,
+        #procgen_algorithm: function,
+    ):
+        self.display_name = display_name
+        self.max_rooms = max_rooms
+        self.room_min_size = room_min_size
+        self.room_max_size = room_max_size
+        self.max_monsters_per_room = max_monsters_per_room
+        self.max_items_per_room = max_items_per_room
+        #self.procgen_algorithm = procgen_algorithm
+
+
+test_dungeon = Biome(
+    display_name = 'Test Dungeon',
+    room_max_size = 10,
+    room_min_size = 6,
+    max_rooms = 30,
+    max_monsters_per_room = 6,
+    max_items_per_room = 12,
+)
 
 
 class GameWorld:
@@ -103,11 +133,7 @@ class GameWorld:
         engine: Engine,
         map_width: int,
         map_height: int,
-        max_rooms: int,
-        room_min_size: int,
-        room_max_size: int,
-        max_monsters_per_room: int,
-        max_items_per_room: int,
+        biome: Biome = test_dungeon,
         current_floor: int = 0
     ):
         self.engine = engine
@@ -115,13 +141,7 @@ class GameWorld:
         self.map_width = map_width
         self.map_height = map_height
 
-        self.max_rooms = max_rooms
-
-        self.room_min_size = room_min_size
-        self.room_max_size = room_max_size
-
-        self.max_monsters_per_room = max_monsters_per_room
-        self.max_items_per_room = max_items_per_room
+        self.biome = biome
 
         self.current_floor = current_floor
 
@@ -131,12 +151,13 @@ class GameWorld:
         self.current_floor += 1
 
         self.engine.game_map = generate_dungeon(
-            max_rooms=self.max_rooms,
-            room_min_size=self.room_min_size,
-            room_max_size=self.room_max_size,
+            engine=self.engine,
             map_width=self.map_width,
             map_height=self.map_height,
-            max_monsters_per_room=self.max_monsters_per_room,
-            max_items_per_room=self.max_items_per_room,
-            engine=self.engine,
+
+            max_rooms=self.biome.max_rooms,
+            room_min_size=self.biome.room_min_size,
+            room_max_size=self.biome.room_max_size,
+            max_monsters_per_room=self.biome.max_monsters_per_room,
+            max_items_per_room=self.biome.max_items_per_room,
         )
