@@ -14,6 +14,7 @@ from engine import Engine
 import entity_factories
 from game_map import GameWorld
 import input_handlers
+import biomes
 
 
 # Load the background image and remove the alpha channel.
@@ -33,6 +34,7 @@ def new_game() -> Engine:
         engine=engine,
         map_width=map_width,
         map_height=map_height,
+        biome=biomes.test_dungeon
     )
     
     engine.game_world.generate_floor()
