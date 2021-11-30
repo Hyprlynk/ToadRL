@@ -103,20 +103,21 @@ class GameWorld:
         engine: Engine,
         map_width: int,
         map_height: int,
-        biome,
-        current_floor: int = 0
+        current_floor: int = -1
     ):
         self.engine = engine
 
         self.map_width = map_width
         self.map_height = map_height
 
-        self.biome = biome
+        self.biome = None
 
         self.current_floor = current_floor
 
     def generate_floor(self) -> None:
         self.current_floor += 1
+        from biomes import BIOME_ORDER
+        self.biome = BIOME_ORDER[self.current_floor]
 
         # passes the biome's parameters into the procgen algorithm specified by the biome
         self.engine.game_map = self.biome.procgen_algorithm(

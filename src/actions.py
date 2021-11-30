@@ -103,6 +103,17 @@ class TakeStairsAction(Action):
             raise exceptions.Impossible("There are no stairs here.")
 
 
+class DebugDescendAction(Action):
+    def perform(self) -> None:
+        """
+        [DEBUG] Generate the next floor.
+        """
+        self.engine.game_world.generate_floor()
+        self.engine.message_log.add_message(
+            "You magically phase through the ground into to the next floor."
+        )
+
+
 class ActionWithDirection(Action):
     def __init__(self, entity: Actor, dx: int, dy: int):
         super().__init__(entity)

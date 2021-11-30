@@ -100,10 +100,10 @@ def generate_simple_dungeon(
     max_rooms: int,
     room_min_size: int,
     room_max_size: int,
-    map_width: int,
-    map_height: int,
     max_monsters_per_room: int,
     max_items_per_room: int,
+    map_width: int,
+    map_height: int,
     engine: Engine,
 ) -> GameMap:
     """Generate a new dungeon map."""

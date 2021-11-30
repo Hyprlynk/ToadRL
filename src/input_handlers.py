@@ -33,15 +33,15 @@ MOVE_KEYS = {
     tcod.event.K_KP_7: (-1, -1),
     tcod.event.K_KP_8: (0, -1),
     tcod.event.K_KP_9: (1, -1),
-    # Vi keys.
-    tcod.event.K_h: (-1, 0),
-    tcod.event.K_j: (0, 1),
-    tcod.event.K_k: (0, -1),
-    tcod.event.K_l: (1, 0),
-    tcod.event.K_y: (-1, -1),
-    tcod.event.K_u: (1, -1),
-    tcod.event.K_b: (-1, 1),
-    tcod.event.K_n: (1, 1),
+    # # Vi keys.
+    # tcod.event.K_h: (-1, 0),
+    # tcod.event.K_j: (0, 1),
+    # tcod.event.K_k: (0, -1),
+    # tcod.event.K_l: (1, 0),
+    # tcod.event.K_y: (-1, -1),
+    # tcod.event.K_u: (1, -1),
+    # tcod.event.K_b: (-1, 1),
+    # tcod.event.K_n: (1, 1),
 }
 
 WAIT_KEYS = {
@@ -393,7 +393,12 @@ class MainGameEventHandler(EventHandler):
 
         player = self.engine.player
 
-        if key == tcod.event.K_PERIOD and modifier & (
+        # Debug actions
+        if key == tcod.event.K_RIGHTBRACKET and modifier == tcod.event.KMOD_ALT: # TODO change key
+            action = DebugDescendAction(player)
+
+        # Regular actions
+        elif key == tcod.event.K_PERIOD and modifier & (
             tcod.event.KMOD_LSHIFT | tcod.event.KMOD_RSHIFT
         ):
             return TakeStairsAction(player)
@@ -418,6 +423,7 @@ class MainGameEventHandler(EventHandler):
             return InventoryActivateHandler(self.engine)
         elif key == tcod.event.K_d:
             return InventoryDropHandler(self.engine)
+
         elif key == tcod.event.K_SLASH:
             return LookHandler(self.engine)
 

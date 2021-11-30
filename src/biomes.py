@@ -29,3 +29,29 @@ test_dungeon = Biome(
     max_items_per_room=12,
     procgen_algorithm=procgen.generate_simple_dungeon
 )
+
+empty_dungeon = Biome(
+    display_name='Empty Dungeon',
+    room_max_size=10,
+    room_min_size=6,
+    max_rooms=10,
+    max_monsters_per_room=0,
+    max_items_per_room=0,
+    procgen_algorithm=procgen.generate_simple_dungeon
+)
+
+toad_hall = Biome(
+    display_name='Toad Hall',
+    room_max_size=10,
+    room_min_size=6,
+    max_rooms=30,
+    max_monsters_per_room=0,
+    max_items_per_room=0,
+    procgen_algorithm=procgen.generate_simple_dungeon
+)
+
+BIOME_ORDER = [
+    test_dungeon,
+    test_dungeon,
+    empty_dungeon
+]

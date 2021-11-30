@@ -46,7 +46,7 @@ def render_dungeon_level(
     """
     x, y = location
 
-    console.print(x=x, y=y, string=f"Dungeon level: {dungeon_level}, Biome: {biome_name}")
+    console.print(x=x, y=y, string=f"Level: {biome_name} {dungeon_level}")
 
 
 def render_names_at_mouse_location(
