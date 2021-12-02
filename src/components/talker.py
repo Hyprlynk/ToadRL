@@ -16,9 +16,11 @@ class Talker(BaseComponent):
         self.exclamations = exclamations
 
     def exclaim(self):
-        self.engine.message_log.add_message(
-            f"{self.parent.name}: \"{random.choice(self.exclamations)}\""
-        )
+        # check if the player is within earshot of the entity
+        if self.engine.player.distance(self.parent.x, self.parent.y) < 10:
+            self.engine.message_log.add_message(
+                f"{self.parent.name}: \"{random.choice(self.exclamations)}\""
+            )
 
 class Silent(Talker):
     def __init__(self):
@@ -26,8 +28,8 @@ class Silent(Talker):
 
 toad_exclamations = [
     'Nice weather today!',
-    'What a nice day to be a toad...',
-    'Toad!',
+    'What a great day to be a toad...',
+    'Croak!',
     'I ought to eat some more seedcakes.',
     'I\'m just toading about.',
 ]
