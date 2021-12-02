@@ -7,6 +7,7 @@ import numpy as np  # type: ignore
 import tcod
 
 from actions import *
+from message_log import Message
 
 if TYPE_CHECKING:
     from entity import Actor
@@ -103,3 +104,28 @@ class HostileEnemy(BaseAI):
             ).perform()
 
         return WaitAction(self.entity).perform()
+
+
+class PassiveNPC(BaseAI):
+    def __init__(self, entity: Actor):
+        super().__init__(entity)
+
+    def wander(self):
+        dx, dy = random.randint(-1,1), random.randint(-1,1)
+        return MovementAction(self.entity, dx, dy).perform()
+    
+    def exclaim(self):
+        self.engine.message_log.add_message(
+            f"{self.entity.name}: \"Nice weather today!\""
+        )
+
+    def wait(self):
+        return WaitAction(self.entity).perform()
+
+    def perform(self) -> None:
+        if random.random() < 0.8:
+            self.wander()
+        elif random.random() < 0.5:
+            self.wait()
+        else:
+            self.exclaim()

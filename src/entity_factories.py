@@ -1,6 +1,7 @@
-from components.ai import HostileEnemy
+import components
+from components.ai import *
 from components import consumable
-from components.fighter import Fighter
+from components.body import Body
 from components.inventory import Inventory
 from entity import Actor, Item
 
@@ -9,7 +10,7 @@ player = Actor(
     color=(255, 255, 255),
     name="Player",
     ai_cls=HostileEnemy,
-    fighter=Fighter(hp=30, defense=2, power=5),
+    body=Body(hp=30, defense=2, power=5),
     inventory=Inventory(capacity=26),
 )
 
@@ -18,7 +19,7 @@ grub = Actor(
     color=(63, 127, 63),
     name="Grub",
     ai_cls=HostileEnemy,
-    fighter=Fighter(hp=10, defense=0, power=3),
+    body=Body(hp=10, defense=0, power=3),
     inventory=Inventory(capacity=0),
 )
 
@@ -27,8 +28,17 @@ rabid_vole = Actor(
     color=(0, 127, 0),
     name="Rabid Vole",
     ai_cls=HostileEnemy,
-    fighter=Fighter(hp=16, defense=1, power=4),
+    body=Body(hp=16, defense=1, power=4),
     inventory=Inventory(capacity=0),
+)
+
+toad = Actor(
+    char="t",
+    color=(209, 141, 23),
+    name="Toad",
+    ai_cls=PassiveNPC,
+    body=Body(hp=13, defense=1, power=2),
+    inventory=Inventory(capacity=3),
 )
 
 seedcake = Item(

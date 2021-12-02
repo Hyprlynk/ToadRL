@@ -51,8 +51,8 @@ class Engine:
 
         render_functions.render_bar(
             console=console,
-            current_value=self.player.fighter.hp,
-            maximum_value=self.player.fighter.max_hp,
+            current_value=self.player.body.hp,
+            maximum_value=self.player.body.max_hp,
             total_width=20,
         )
 

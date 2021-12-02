@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from entity import Actor
 
 
-class Fighter(BaseComponent):
+class Body(BaseComponent):
     parent: Actor
 
     def __init__(self, hp: int, defense: int, power: int):

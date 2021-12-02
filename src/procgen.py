@@ -57,6 +57,8 @@ def place_entities(
         if not any(entity.x == x and entity.y == y for entity in dungeon.entities):
             if random.random() < 0.8:
                 entity_factories.grub.spawn(dungeon, x, y)
+            elif random.random() < 0.7:
+                entity_factories.toad.spawn(dungeon, x, y)
             else:
                 entity_factories.rabid_vole.spawn(dungeon, x, y)
 

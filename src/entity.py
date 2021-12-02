@@ -3,12 +3,13 @@ from __future__ import annotations
 import copy
 import math
 from typing import Optional, Tuple, Type, TypeVar, TYPE_CHECKING, Union
+from components.body import Body
 
 from render_order import RenderOrder
 
 if TYPE_CHECKING:
     from components.ai import BaseAI
-    from components.fighter import Fighter
+    from components.body import Body
     from components.consumable import Consumable
     from components.inventory import Inventory
     from game_map import GameMap
@@ -92,7 +93,7 @@ class Actor(Entity):
         color: Tuple[int, int, int] = (255, 255, 255),
         name: str = "<Unnamed>",
         ai_cls: Type[BaseAI],
-        fighter: Fighter,
+        body: Body,
         inventory: Inventory,
     ):
         super().__init__(
@@ -107,8 +108,8 @@ class Actor(Entity):
 
         self.ai: Optional[BaseAI] = ai_cls(self)
 
-        self.fighter = fighter
-        self.fighter.parent = self
+        self.body = body
+        self.body.parent = self
 
         self.inventory = inventory
         self.inventory.parent = self
@@ -118,7 +119,7 @@ class Actor(Entity):
         """Returns True as long as this actor can perform actions."""
         return bool(self.ai)
 
-    
+
 class Item(Entity):
     def __init__(
         self,
