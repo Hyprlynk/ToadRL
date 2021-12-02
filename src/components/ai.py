@@ -113,11 +113,6 @@ class PassiveNPC(BaseAI):
     def wander(self):
         dx, dy = random.randint(-1,1), random.randint(-1,1)
         return MovementAction(self.entity, dx, dy).perform()
-    
-    def exclaim(self):
-        self.engine.message_log.add_message(
-            f"{self.entity.name}: \"Nice weather today!\""
-        )
 
     def wait(self):
         return WaitAction(self.entity).perform()
@@ -125,7 +120,7 @@ class PassiveNPC(BaseAI):
     def perform(self) -> None:
         if random.random() < 0.8:
             self.wander()
-        elif random.random() < 0.5:
+        elif random.random() < 0.8:
             self.wait()
         else:
-            self.exclaim()
+            self.entity.talker.exclaim()

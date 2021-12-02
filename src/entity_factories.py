@@ -3,6 +3,7 @@ from components.ai import *
 from components import consumable
 from components.body import Body
 from components.inventory import Inventory
+from components.talker import *
 from entity import Actor, Item
 
 player = Actor(
@@ -12,6 +13,7 @@ player = Actor(
     ai_cls=HostileEnemy,
     body=Body(hp=30, defense=2, power=5),
     inventory=Inventory(capacity=26),
+    talker=Silent()
 )
 
 grub = Actor(
@@ -21,6 +23,7 @@ grub = Actor(
     ai_cls=HostileEnemy,
     body=Body(hp=10, defense=0, power=3),
     inventory=Inventory(capacity=0),
+    talker=Silent()
 )
 
 rabid_vole = Actor(
@@ -30,6 +33,7 @@ rabid_vole = Actor(
     ai_cls=HostileEnemy,
     body=Body(hp=16, defense=1, power=4),
     inventory=Inventory(capacity=0),
+    talker=Silent()
 )
 
 toad = Actor(
@@ -39,6 +43,7 @@ toad = Actor(
     ai_cls=PassiveNPC,
     body=Body(hp=13, defense=1, power=2),
     inventory=Inventory(capacity=3),
+    talker=Talker(toad_exclamations)
 )
 
 seedcake = Item(

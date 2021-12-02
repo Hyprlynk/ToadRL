@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     from components.body import Body
     from components.consumable import Consumable
     from components.inventory import Inventory
+    from components.talker import Talker
     from game_map import GameMap
 
 T = TypeVar("T", bound="Entity")
@@ -95,6 +96,7 @@ class Actor(Entity):
         ai_cls: Type[BaseAI],
         body: Body,
         inventory: Inventory,
+        talker: Talker,
     ):
         super().__init__(
             x=x,
@@ -113,6 +115,9 @@ class Actor(Entity):
 
         self.inventory = inventory
         self.inventory.parent = self
+
+        self.talker = talker
+        self.talker.parent = self
 
     @property
     def is_alive(self) -> bool:
